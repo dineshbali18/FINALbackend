@@ -7,13 +7,12 @@ const TeacherSchema=mongoose.Schema({
         required:true
     },
     t_id:{
-        type:Number,
-        unique:true,
+        type:ObjectId,
         required:true
     },
     section:{
         type:ObjectId,
-        ref:"Section"
+        ref:"Master"
     },
     subject:{
         type:String,
