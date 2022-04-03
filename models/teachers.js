@@ -6,6 +6,11 @@ const TeacherSchema=mongoose.Schema({
         type:String,
         required:true
     },
+    t_id:{
+        type:Number,
+        unique:true,
+        required:true
+    },
     section:{
         type:ObjectId,
         ref:"Section"
