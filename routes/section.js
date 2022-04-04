@@ -81,6 +81,8 @@ router.get("/data/teacher/sections",(req,res)=>{
             var resObj={};
             resObj.section=data[i].section.s_name;
             resObj.subject=data[i].subject;
+            resObj.feedbackFromStudents=data[i].feedbackFromStudents;
+            resObj.messageFromManagement=data[i].messageFromManagement;
             if(data[i].count==0){
             resObj.rating=0;
             }
