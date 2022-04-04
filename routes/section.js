@@ -81,7 +81,7 @@ router.get("/data/teacher/sections",(req,res)=>{
             var resObj={};
             resObj.section=data[i].section.s_name;
             resObj.subject=data[i].subject;
-            if(data[i]==0){
+            if(data[i].count==0){
             resObj.rating=0;
             }
             else{
