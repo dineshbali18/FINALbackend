@@ -67,6 +67,52 @@ router.post("/section/teachers/section/:sectionId",(req,res)=>{
     
 
 })
+
+
+//teachers login
+router.get("/data/teacher/sections",(req,res)=>{
+    Teacher.find({}).populate("section","s_name").exec((err,data)=>{
+        if(err){
+            return res.json(err);
+        }
+        // console.log(data);
+        var resultArr=[];
+        for(var i=0;i<data.length;i++){
+            var resObj={};
+            resObj.section=data[i].section.s_name;
+            resObj.subject=data[i].subject;
+            resObj.rating=(data[i].rating/data[0].count);
+            resultArr.push(resObj);
+        }
+        return res.json(resultArr);
+    }
+    )
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//display feedback to teachers
+router.get("/feedback/teachers",(req,res)=>{
+    Teacher.find({t_id:req.body.id}).exec((err,data)=>{
+        if(err){
+            console.log(err);
+        }
+        return res.json(data);
+    })
+})
+
+
 //getting all teachers using section id
 router.get("/section/teachers/section/:sectionId",(req,res)=>{
     console.log(req.sec._id);

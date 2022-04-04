@@ -12,7 +12,7 @@ const TeacherSchema=mongoose.Schema({
     },
     section:{
         type:ObjectId,
-        ref:"Master"
+        ref:"Section"
     },
     subject:{
         type:String,
