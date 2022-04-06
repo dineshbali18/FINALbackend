@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
-import fetch from 'node-fetch';
-
+const https=require("https");
+const axios=require("axios")
 
 //models
 const Section=require('../models/sections');
@@ -65,14 +65,20 @@ router.post("/section/teachers/section/:sectionId",(req,res)=>{
             })
         }
         else{
-            fetch(`${API}/api/section/add/remainingsubjects`, {
-                method: "POST",
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify(teacher.subject)
-              })
+            async function addToRemaining(){
+                let payload={subject:req.body.subject}
+                let res=await axios.post('https://userda.herokuapp.com/api/section/add/remainingsubjects',payload);
+            }
+            addToRemaining();
+
+            // fetch(`${API}/api/section/add/remainingsubjects`, {
+            //     method: "POST",
+            //     headers: {
+            //       Accept: "application/json",
+            //       "Content-Type": "application/json"
+            //     },
+            //     body: JSON.stringify(teacher.subject)
+            //   })
         }
         res.json(teach);
     })
