@@ -62,6 +62,16 @@ router.post("/section/teachers/section/:sectionId",(req,res)=>{
                 error:"Failed to save in DB"
             })
         }
+        else{
+            fetch(`${API}/api/section/add/remainingsubjects`, {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(teacher.subject)
+              })
+        }
         res.json(teach);
     })
     
