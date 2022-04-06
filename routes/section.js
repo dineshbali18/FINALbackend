@@ -47,7 +47,7 @@ router.post("/create/section",(req,res)=>{
 
 //add teachers to section
 router.post("/section/teachers/section/:sectionId",(req,res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     // console.log(req.sec._id);
     // req.body.teacher.section=req.sec._id;
     const teacher=new Teacher({
@@ -56,7 +56,7 @@ router.post("/section/teachers/section/:sectionId",(req,res)=>{
         subject:req.body.subject,
         photo:req.body.photo
     });
-    console.log(teacher);
+    // console.log(teacher);
     teacher.save((err,teach)=>{
         if(err){
             console.log(err);
