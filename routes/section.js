@@ -55,6 +55,7 @@ router.post("/section/teachers/section/:sectionId",(req,res)=>{
         subject:req.body.subject,
         photo:req.body.photo
     });
+    console.log(teacher);
     teacher.save((err,teach)=>{
         if(err){
             console.log(err);
