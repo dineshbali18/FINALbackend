@@ -66,7 +66,7 @@ router.post("/section/teachers/section/:sectionId",(req,res)=>{
         }
         else{
             async function addToRemaining(){
-                let payload={subject:req.body.subject,section:req.sec._id}
+                let payload={subject:req.body.subject,section:req.sec}
                 let res=await axios.post('https://userda.herokuapp.com/api/section/add/remainingsubjects',payload);
             }
             addToRemaining();
