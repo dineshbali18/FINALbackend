@@ -54,7 +54,8 @@ router.post("/section/teachers/section/:sectionId",(req,res)=>{
         t_name:req.body.t_name,
         section:req.sec._id,
         subject:req.body.subject,
-        photo:req.body.photo
+        photo:req.body.photo,
+        t_id:req.body.t_id
     });
     console.log(teacher);
     teacher.save((err,teach)=>{
@@ -88,12 +89,14 @@ router.post("/section/teachers/section/:sectionId",(req,res)=>{
 
 
 //teachers login
-router.get("/data/teacher/sections",(req,res)=>{
-    Teacher.find({}).populate("section","s_name").exec((err,data)=>{
+router.get("/data/teacher/sections/:teacherId",(req,res)=>{
+    console.log(req.teacher)
+    
+    Teacher.find({t_id:req.teacher}).populate("section","s_name").exec((err,data)=>{
         if(err){
             return res.json(err);
         }
-        // console.log(data);
+        console.log(data);
         var resultArr=[];
         for(var i=0;i<data.length;i++){
             var resObj={};
@@ -115,20 +118,8 @@ router.get("/data/teacher/sections",(req,res)=>{
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //display feedback to teachers
-router.get("/feedback/teachers",(req,res)=>{
+router.get("/feedback/teachers/",(req,res)=>{
     Teacher.find({t_id:req.body.id}).exec((err,data)=>{
         if(err){
             console.log(err);
@@ -210,5 +201,26 @@ router.get("/get/feedback/:teacherId",(req,res)=>{
         }
     })
 })
+
+//get req to get name
+router.get("/get/name/:teacherId",(req,res)=>{
+    Teacher.findById({_id:req.teacher}).exec((err,tdata)=>{
+        if(err){
+            return res.json("Error in finding name")
+        }
+        else{
+            return res.json(tdata.name);
+        }
+    })
+})
+
+
+
+//very very important
+// router.get("/remaining/teachers",(req,res)=>{
+//     // const remainingData=new Set();
+//     const res=await axios.get("/get/remaining/subjects/:userId");
+//     console.log(res.data);
+// })
 
 module.exports=router;
